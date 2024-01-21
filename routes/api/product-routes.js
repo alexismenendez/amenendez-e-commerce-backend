@@ -53,7 +53,7 @@ router.post("/", (req, res) => {
         return ProductTag.bulkCreate(productTagIdArr);
       }
       // if no product tags, just respond
-      res.status(200).json(product);
+      res.status(200).json({message: "Product created!", product});
     })
     .then((productTagIds) => res.status(200).json(productTagIds))
     .catch((err) => {
@@ -98,7 +98,7 @@ router.put("/:id", (req, res) => {
         });
       }
 
-      return res.json(product);
+      return res.json({message: "Product updated!", product});
     })
     .catch((err) => {
       // console.log(err);
@@ -117,7 +117,7 @@ router.delete("/:id", async (req, res) => {
       res.status(404).json({ message: "No product fonuds with this id!"})
     }
 
-    res.status(200).json(deleteProduct);
+    res.status(200).json({ message: "Product Deleted!", deleteProduct});
   } catch (err) {
     res.status(500).json(err)
   }
