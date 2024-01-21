@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const category = await Category.findByPk({
+    const category = await Category.findOne({
       where: { id: req.params.id },
       include: [Product]
     });
@@ -34,7 +34,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const newCategory = await Category.create(req.body);
-    res.status(200).json(newCategory);
+    res.status(200).json({message: "Category created!", newCategory});
   } catch (err) {
     res.status(400).json(err);
   }
@@ -51,7 +51,7 @@ router.put('/:id', async (req, res) => {
       return;
     }
 
-    res.status(200).json(updateCategory)
+    res.status(200).json({ message: "Category Updated!", updateCategory})
   } catch (err) {
     res.status(400).json(err);
   }
@@ -68,7 +68,7 @@ router.delete('/:id', async (req, res) => {
       return;
     }
 
-    res.status(200).json(deleteCategory);
+    res.status(200).json({message: "Category deleted!", deleteCategory});
   } catch (err) {
     res.status(500).json(err);
   }
